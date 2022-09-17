@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import * as mongoose from 'mongoose';
+
 const connectionString = (dbName = 'test') => `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}/${dbName}`;
 let db;
 
@@ -61,7 +62,7 @@ const save = (dataModel) => new Promise(async (resolve, reject) => {
 });
 
 
-module.exports = {
+export default {
     connect,
     disConnect,
     find,

@@ -1,7 +1,6 @@
-const express = require("express");
+import express from 'express';
 const router = express.Router();
-const teacherController = require('./../controllers/teacher_controller');
-
+import * as teacherController from './../controllers/teacher_controller.js';
 
 router.get('/', async (request, response) => {// read, fetch all teachers data
     let responseObj = {};
@@ -9,10 +8,10 @@ router.get('/', async (request, response) => {// read, fetch all teachers data
     responseObj.data = {};
     responseObj.message = '';
     try {
-        const result = await teacherController.findAllTeachers();
+        const result = await teacherController.default.findAllTeachers();
         responseObj.data = result;
         response.send(responseObj);
-    } catch (error) {
+    } catch (error) {console.error(error);
         responseObj.status = error.code?error.code:500;
         response.message = error.message?error.message:"Error occured in code";
         response.send(responseObj);
@@ -57,4 +56,4 @@ router.delete('/:teacher_id', (request, response) => {// delete, delete perticul
     response.send(responseObj);
 });
 
-module.exports = router;
+export default router;

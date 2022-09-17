@@ -1,5 +1,5 @@
-let mongoose = require("mongoose");
-const patcher = require('mongoose-patcher'); 
+import * as mongoose from 'mongoose';
+import patcher from 'mongoose-patcher'; 
 let Schema = mongoose.Schema;
 
 let schema = new Schema({
@@ -17,4 +17,4 @@ let schema = new Schema({
 
 // If no path is given, all date fields will be applied
 schema.plugin(patcher);
-module.exports = mongoose.model("teacher_details", schema);
+export default mongoose.model("teacher_details", schema);
