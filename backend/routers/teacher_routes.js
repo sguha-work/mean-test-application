@@ -1,6 +1,7 @@
 import express from 'express';
 const router = express.Router();
-import * as teacherController from './../controllers/teacher_controller.js';
+import TeacherController from './../controllers/teacher_controller.js';
+const teacherController = new TeacherController();
 
 router.get('/', async (request, response) => {// read, fetch all teachers data
     let responseObj = {};
@@ -8,7 +9,7 @@ router.get('/', async (request, response) => {// read, fetch all teachers data
     responseObj.data = {};
     responseObj.message = '';
     try {
-        const result = await teacherController.default.findAllTeachers();
+        const result = await teacherController.findAllTeachers();
         responseObj.data = result;
         response.send(responseObj);
     } catch (error) {console.error(error);

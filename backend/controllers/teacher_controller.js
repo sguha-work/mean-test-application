@@ -1,32 +1,36 @@
-import * as db from './../services/db.js';
+import DBService from './../services/db.js';
 import * as teacherModel from './../models/teacher_model.js';
-
-const findAllTeachers = ()=>new Promise(async (resolve, reject)=>{
-    try {
-        await db.default.connect('teacher');
-        const result = await db.default.find(teacherModel.default);
-        resolve(result);
-    } catch(error) {
-        reject(error);
-    } finally {
-        db.default.disConnect();
+class TeacherController {
+    constructor() {
+        this.dbService = new DBService();
     }
-});
-
-const createTeacher = ({ name,phonenumber,address,photo,sex})=>new Promise(async (resolve, reject)=>{
-    try {
-        await db.default.connect('teacher');
-        const teacher = new teacherModel.default({name,phonenumber,address,photo,sex});
-        const result = await db.default.save(teacher);
-        resolve(result);
-    } catch(error) {
-        reject(error);
-    } finally {
-        db.default.disConnect();
+    findAllTeachers() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.dbService.connect('teacher');
+                const result = await this.dbService.find(teacherModel.default);
+                resolve(result);
+            } catch (error) {
+                reject(error);
+            } finally {
+                this.dbService.disConnect();
+            }
+        });
     }
-});
 
-export default {
-    findAllTeachers,
-    createTeacher
+    createTeacher({ name, phonenumber, address, photo, sex }) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this.dbService.connect('teacher');
+                const teacher = new teacherModel.default({ name, phonenumber, address, photo, sex });
+                const result = await this.dbService.save(teacher);
+                resolve(result);
+            } catch (error) {
+                reject(error);
+            } finally {
+                this.dbService.disConnect();
+            }
+        });
+    }
 }
+export default TeacherController;
