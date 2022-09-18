@@ -1,0 +1,59 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "3.0.3",
+      "title": "MEAN test application",
+      "description": "In this application we are trying the MongoDB with ExpressJS backend and Angular front end",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:1000",
+    "basePath": "/",
+    "paths": {
+        "/teachers": {
+          "get": {
+            "tags": ["Teachers"],
+            "summary": "Get all teachers in system",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/Teacher"
+                }
+              }
+            }
+          }
+        }
+      },
+      "definitions": {
+        "Teacher": {
+          "required": ["name", "phonenumber", "address", "sex"],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "isPublic": {
+              "type": "boolean"
+            },
+            "phonenumber": {
+              "type": "integer"
+            },
+            "address": {
+              "type": "string"
+            },
+            "sex": {
+              "type": "string",
+              "enum": ["Male", "Female", "Trans", "Gay"]
+            },
+            "photo":{
+                "type": "string"
+            }
+          }
+        }
+      },
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"]
+  }

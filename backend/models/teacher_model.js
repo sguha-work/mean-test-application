@@ -10,6 +10,7 @@ let schema = new Schema({
   sex: {
     type: String,
     enum: ["Male", "Female", "Trans", "Gay"],
+    required: true
   }
 },
   { timestamps: true, optimisticConcurrency: true }
