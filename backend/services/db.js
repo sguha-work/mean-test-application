@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 class DBService {
     constructor() {
         this.db = null;
@@ -10,7 +10,7 @@ class DBService {
     connect(DBName) {
         return new Promise(async (resolve, reject) => {
             try {
-                await mongoose.connect(this.connectionString(DBName), { useNewUrlParser: true }); // await on a step makes process to wait until it's done/ err'd out.
+                await mongoose.connect(this.connectionString(DBName)); // await on a step makes process to wait until it's done/ err'd out.
                 this.db = mongoose.connection;
                 resolve(this.db);
             } catch (error) {
@@ -18,16 +18,13 @@ class DBService {
             }
         });
     }
-    
-    disConnect() {
-        new Promise(async (resolve, reject) => {
-            try {
-                this.db.close();
-                resolve(this.db);
-            } catch (error) {
-                reject(error);
-            }
-        });
+
+    disConnect(obj) {
+        try {
+            this.db.close();
+        } catch (error) {
+            console.log('db connection close error-->', error);
+        }
     }
 
     find(dataModel, query = {}) {
