@@ -1,5 +1,5 @@
 import DBService from './../services/db.js';
-import * as teacherModel from './../models/teacher_model.js';
+import * as teacherModel from './../model/teacher_model.js';
 class TeacherController {
     constructor() {
         this.dbService = new DBService();

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 
 import swaggerDocument from './swagger.json' assert { type: 'json' };
-import * as teachersRouter from './routers/teacher_routes.js';
+import * as teachersRouter from './modules/teachers/routes/teacher_routes.js';
 
 dotenv.config();
 const app = express();
