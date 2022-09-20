@@ -1,0 +1,23 @@
+import express from 'express';
+const router = express.Router();
+import TeacherController from './../controllers/teacher_controller.js';
+const teacherController = new TeacherController();
+
+router.post('/login', async (request, response) => {// create, create new teacher
+    let responseObj = {};
+    responseObj.status = 201;
+    responseObj.data = {};
+    responseObj.message = '';
+    try {
+        console.log(request.body);
+        const result = await teacherController.createTeacher(request.body);
+        responseObj.data = result;
+        response.send(responseObj);
+    } catch (error) {
+        responseObj.status = error.code?error.code:500;
+        response.message = error.message?error.message:"Error occured in code";
+        response.send(responseObj);
+    }
+});
+
+export default router;

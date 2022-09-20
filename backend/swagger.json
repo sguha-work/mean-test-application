@@ -133,6 +133,65 @@
           }
         ]
       }
+    },
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "User signup",
+        "description": "User signup",
+        "operationId": "signup",
+        "requestBody": {
+          "description": "signup",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Response of successful teacher creation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -186,8 +245,33 @@
           "name": "order"
         }
       },
-      "CreateTeacherRequestModel":{
-        "properties":{
+      "User": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "birthdate": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "Male",
+              "Female",
+              "Trans",
+              "Gay"
+            ]
+          }
+        }
+      },
+      "CreateTeacherRequestModel": {
+        "properties": {
           "name": {
             "type": "string"
           },
@@ -202,20 +286,17 @@
           },
           "sex": {
             "type": "string",
-            "enum":[
+            "enum": [
               "male",
               "female",
               "gay",
               "trans"
             ]
-
           }
         }
       },
-      "CreateTeacherResponseModel":{
-        "properties": {
-          
-        }
+      "CreateTeacherResponseModel": {
+        "properties": {}
       }
     },
     "securitySchemes": {

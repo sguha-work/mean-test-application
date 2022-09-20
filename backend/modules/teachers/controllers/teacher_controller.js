@@ -1,19 +1,15 @@
-import DBService from './../services/db.js';
-import * as teacherModel from './../model/teacher_model.js';
+import TeacherService from "./../services/teacher_service.js";
 class TeacherController {
     constructor() {
-        this.dbService = new DBService();
+        this.teacherService = new TeacherService();
     }
     findAllTeachers() {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.dbService.connect('teacher');
-                const result = await this.dbService.find(teacherModel.default);
+                const result = await this.teacherService.findAllTeachers();
                 resolve(result);
             } catch (error) {
                 reject(error);
-            } finally {
-                this.dbService.disConnect();
             }
         });
     }
@@ -21,14 +17,10 @@ class TeacherController {
     createTeacher({ name, phonenumber, address, photo, sex }) {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.dbService.connect('teacher');
-                const teacher = new teacherModel.default({ name, phonenumber, address, photo, sex });
-                const result = await this.dbService.save(teacher);
+                const result = await this.teacherService.createTeacher({ name, phonenumber, address, photo, sex });
                 resolve(result);
             } catch (error) {
                 reject(error);
-            } finally {
-                this.dbService.disConnect();
             }
         });
     }
