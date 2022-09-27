@@ -17,4 +17,4 @@ class AuthController {
         });
     }
 }
-export default TeacherController;
+export default AuthController;
