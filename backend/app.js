@@ -7,6 +7,7 @@ import https from 'https';
 
 import swaggerDocument from './swagger.json' assert { type: 'json' };
 import * as teachersRouter from './modules/teachers/routes/teacher_routes.js';
+import * as consumerRouter from './modules/consumers/routes/consumer_routes.js';
 
 dotenv.config();
 const app = express();
@@ -21,7 +22,7 @@ app.use(function (req, res, next) {
 });
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/teachers', teachersRouter.default);
-
+app.use('/consumers', teachersRouter.default);
 // getting pem and cert file for https setup
 const key = fs.readFileSync('./key.pem');
 const cert = fs.readFileSync('./cert.pem');
