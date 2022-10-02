@@ -22,7 +22,7 @@ app.use(function (req, res, next) {
 });
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/teachers', teachersRouter.default);
-app.use('/consumers', teachersRouter.default);
+app.use('/consumers', consumerRouter.default);
 // getting pem and cert file for https setup
 const key = fs.readFileSync('./key.pem');
 const cert = fs.readFileSync('./cert.pem');

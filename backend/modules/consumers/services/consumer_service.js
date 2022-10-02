@@ -7,7 +7,7 @@ class ConsumerService {
     findAll() {
         return new Promise(async (resolve, reject) => {
             try {
-                await this.dbService.connect('consumer');
+                await this.dbService.connect('consumersdb');
                 const result = await this.dbService.find(consumerModel.default);
                 resolve(result);
             } catch (error) {

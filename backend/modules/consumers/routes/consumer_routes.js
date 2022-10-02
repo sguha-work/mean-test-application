@@ -11,7 +11,7 @@ router.get('/', async (request, response) => {// read, fetch all teachers data
     try {
         const result = await consumerController.findAll();
         responseObj.data = result;
-        response.send(responseObj);
+        response.send(result);
     } catch (error) {console.error(error);
         responseObj.status = error.code?error.code:500;
         response.message = error.message?error.message:"Error occured in code";
